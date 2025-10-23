@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgroCalc – FAQ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(to bottom, #f0f2f5, #d6e6d6);
+      color: #2b2b2b;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+      z-index: 1000;
+    }
+
+    header img {
+      height: 70px;
+      width: auto;
+    }
+
+    header .title {
+      font-size: 1.6rem;
+      color: #3d773d;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    main {
+      margin-top: 110px;
+      padding: 20px;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    h2 {
+      color: #4b7a4b;
+      margin-bottom: 20px;
+    }
+
+    .faq-card {
+      background: linear-gradient(135deg, #6bb36b, #4b7a4b);
+      color: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 15px;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    .faq-card:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+
+    .faq-question {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .faq-answer {
+      display: none;
+      margin-top: 15px;
+      background: rgba(255,255,255,0.1);
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .faq-answer p {
+      margin: 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #3d773d;
+      color: white;
+      font-size: 0.9rem;
+      margin-top: 40px;
+      border-top: 3px solid #7a5e42;
+    }
+
+    @keyframes fadeInUp {
+      0% {opacity: 0; transform: translateY(30px);}
+      100% {opacity: 1; transform: translateY(0);}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="title">
+      <img src="logo.png" alt="Logo AgroCalc">
+      <span>AgroCalc – FAQ</span>
+    </div>
+    <div>CEPI</div>
+  </header>
+
+  <main>
+    <h2>Perguntas Frequentes (FAQ)</h2>
+
+    <div class="faq-card" onclick="toggleAnswer(this)">
+      <div class="faq-question">1. O que é o AgroCalc?</div>
+      <div class="faq-answer">
+        <p>O AgroCalc é um sistema desenvolvido por Brenno Henrique Board para calcular a necessidade de calcário no solo, com base nos teores de magnésio, cálcio e outros parâmetros do solo, auxiliando produtores a otimizar a fertilidade do solo.</p>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleAnswer(this)">
+      <div class="faq-question">2. O que é agricultura de precisão?</div>
+      <div class="faq-answer">
+        <p>A agricultura de precisão é um conjunto de técnicas que utiliza tecnologia, dados e análises para otimizar o manejo do solo, culturas e insumos, aumentando a produtividade e reduzindo desperdícios.</p>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleAnswer(this)">
+      <div class="faq-question">3. Como escolher o tipo de calcário?</div>
+      <div class="faq-answer">
+        <p>A escolha depende do teor de magnésio no solo: calcário calcítico é indicado para solos com baixa deficiência de Mg, enquanto o dolomítico é indicado para solos com deficiência de Ca e Mg.</p>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleAnswer(this)">
+      <div class="faq-question">4. Como o PRNT influencia na aplicação?</div>
+      <div class="faq-answer">
+        <p>O PRNT (Poder Relativo de Neutralização Total) indica a eficiência do calcário. Quanto maior o PRNT, menor a quantidade necessária para corrigir a acidez do solo.</p>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleAnswer(this)">
+      <div class="faq-question">5. Qual a diferença entre calcário calcítico e dolomítico?</div>
+      <div class="faq-answer">
+        <p>O calcítico possui mais cálcio e baixo magnésio, enquanto o dolomítico possui tanto cálcio quanto magnésio em proporções equilibradas, ideal para corrigir solos deficientes em ambos.</p>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleAnswer(this)">
+      <div class="faq-question">6. Como a análise de solo influencia na escolha do calcário?</div>
+      <div class="faq-answer">
+        <p>A análise química do solo informa os teores de Ca, Mg e Al, permitindo calcular a quantidade correta de calcário e o tipo mais adequado para corrigir deficiências.</p>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleAnswer(this)">
+      <div class="faq-question">7. O que é CTC e como calcular?</div>
+      <div class="faq-answer">
+        <p>A Capacidade de Troca Catiônica (CTC) indica a capacidade do solo de reter cátions como Ca, Mg, K e Na. É calculada somando esses cátions e a acidez (H+Al) do solo.</p>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleAnswer(this)">
+      <div class="faq-question">8. Como calcular a necessidade de calagem (NC)?</div>
+      <div class="faq-answer">
+        <p>A necessidade de calagem é calculada considerando o V2 (saturação de bases desejada), V1 (saturação atual) e a CTC, ajustando a quantidade de calcário com base no PRNT.</p>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleAnswer(this)">
+      <div class="faq-question">9. Qual a importância da relação Ca:Mg?</div>
+      <div class="faq-answer">
+        <p>Manter a relação Ca:Mg adequada (3:1 a 4:1) garante o desenvolvimento equilibrado das plantas e evita deficiências nutricionais.</p>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleAnswer(this)">
+      <div class="faq-question">10. Quando aplicar o calcário?</div>
+      <div class="faq-answer">
+        <p>O calcário deve ser aplicado antes da semeadura, preferencialmente com solo úmido, permitindo melhor reação química e absorção pelos nutrientes.</p>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleAnswer(this)">
+      <div class="faq-question">11. Como o tipo de cultura influencia na calagem?</div>
+      <div class="faq-answer">
+        <p>Culturas mais exigentes em nutrientes podem requerer maior saturação de bases ou ajuste da quantidade de calcário aplicado, baseado nos teores de Ca e Mg.</p>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleAnswer(this)">
+      <div class="faq-question">12. O que é calcário magnesiano?</div>
+      <div class="faq-answer">
+        <p>É um tipo intermediário de calcário com teor de Mg entre 5% e 12%, usado para solos com deficiência moderada de magnésio.</p>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleAnswer(this)">
+      <div class="faq-question">13. Como interpretar a análise química do solo?</div>
+      <div class="faq-answer">
+        <p>Observando os teores de Ca, Mg, Al e CTC, é possível determinar se o solo precisa de calagem e qual tipo de corretivo usar.</p>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleAnswer(this)">
+      <div class="faq-question">14. Como ajustar a calagem pelo PRNT?</div>
+      <div class="faq-answer">
+        <p>Se o PRNT for menor que 100%, divida a quantidade calculada de calcário pelo PRNT/100. Por exemplo, PRNT 80% → quantidade ÷ 0,8.</p>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleAnswer(this)">
+      <div class="faq-question">15. O que é Teor de Magnésio e Cálcio?</div>
+      <div class="faq-answer">
+        <p>São os níveis desses nutrientes no solo, expressos geralmente em cmolc/dm³, usados para calcular a necessidade de correção do solo.</p>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleAnswer(this)">
+      <div class="faq-question">16. Como a umidade do solo influencia na calagem?</div>
+      <div class="faq-answer">
+        <p>O calcário reage melhor em solos úmidos, permitindo que Ca e Mg se dissolvam e se tornem disponíveis para as plantas.</p>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleAnswer(this)">
+      <div class="faq-question">17. Qual a importância de corrigir o solo antes da semeadura?</div>
+      <div class="faq-answer">
+        <p>Corrigir o solo antes da semeadura garante nutrientes equilibrados, pH adequado e melhores condições de crescimento das plantas desde o início.</p>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleAnswer(this)">
+      <div class="faq-question">18. Como a calagem afeta o pH do solo?</div>
+      <div class="faq-answer">
+        <p>A calagem neutraliza a acidez do solo, aumentando o pH e melhorando a disponibilidade de nutrientes para as plantas.</p>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleAnswer(this)">
+      <div class="faq-question">19. Por que o solo precisa de Ca e Mg?</div>
+      <div class="faq-answer">
+        <p>O cálcio fortalece a estrutura do solo e ajuda na absorção de outros nutrientes; o magnésio é essencial para a fotossíntese e síntese de clorofila.</p>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleAnswer(this)">
+      <div class="faq-question">20. O que é saturação de bases desejada (V2)?</div>
+      <div class="faq-answer">
+        <p>É a porcentagem de saturação por bases que se deseja atingir para a cultura, garantindo que o solo tenha Ca, Mg e K suficientes para o desenvolvimento ideal das plantas.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    AgroCalc – Desenvolvido por Brenno Board | CEPI
+  </footer>
+
+  <script>
+    function toggleAnswer(card) {
+      const answer = card.querySelector(".faq-answer");
+      answer.style.display = answer.style.display === "block" ? "none" : "block";
+    }
+  </script>
+</body>
+</html>
