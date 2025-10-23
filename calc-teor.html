@@ -34,7 +34,7 @@
     input, select { padding: 10px; border-radius: 8px; border: 1px solid #ccc; width: 100%; margin-bottom: 15px; }
     button { padding: 12px 20px; border: none; border-radius: 8px; background: #4b7a4b; color: white; font-size: 1rem; cursor: pointer; transition: background 0.3s; }
     button:hover { background: #6bb36b; }
-    #resultado { display: none; background: #ffffffcc; padding: 20px; border-radius: 15px; margin-top: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
+    #resultado { display: none; background: #ffffffcc; padding: 20px; border-radius: 15px; margin-top: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); opacity: 0; transform: translateY(20px); transition: all 0.6s ease; color: #2b2b2b; }
     footer { text-align: center; padding: 20px; background: #3d773d; color: white; font-size: 0.9rem; margin-top: 40px; border-top: 3px solid #7a5e42; }
     @keyframes fadeInUp { 0% {opacity: 0; transform: translateY(30px);} 100% {opacity: 1; transform: translateY(0);} }
   </style>
@@ -59,7 +59,7 @@
       <label>Teor de Alumínio (Al) - Opcional:</label>
       <input type="number" id="al" placeholder="Ex: 0.5">
       <label>PRNT (%) do calcário:</label>
-      <input type="number" id="prnt" placeholder="Ex: 80" value="">
+      <input type="number" id="prnt" placeholder="Ex: 80" value="80">
       <button onclick="calcularCalcario()">Calcular</button>
       <div id="resultado"></div>
     </div>
@@ -91,26 +91,31 @@
         return;
       }
 
+      // Relação Ca:Mg
+      const caMg = (ca / mg).toFixed(2);
+
       // Determinar tipo de calcário
       let tipoCalcario = '';
-      if (mg < 3) tipoCalcario = 'Dolomítico';
-      else if (ca < 5 && mg >= 3) tipoCalcario = 'Calcítico';
-      else if (mg >= 3 && mg <= 5) tipoCalcario = 'Magnesiano';
-      else tipoCalcario = 'Não é necessário aplicar calcário';
+      if (mg < 1.0) tipoCalcario = 'Dolomítico';
+      else if (mg >= 1.0 && mg <= 2.5) tipoCalcario = 'Magnesiano';
+      else tipoCalcario = 'Calcítico';
 
-      // Cálculo simplificado (exemplo)
-      let quantidade = ((5 - ca + 3 - mg) * 2) / (prnt / 100);
-      if (quantidade < 0) quantidade = 0;
+      // Cálculo mais realista de necessidade de calcário
+      const caIdeal = 5.0; // referência de Ca
+      const mgIdeal = 3.0; // referência de Mg
+      let necessidade = ((caIdeal - ca) + (mgIdeal - mg)) * 2 / (prnt / 100);
+      if (necessidade < 0) necessidade = 0;
 
       const resultadoDiv = document.getElementById('resultado');
       resultadoDiv.style.display = 'block';
       resultadoDiv.innerHTML = `
         <h3>Resultado do Cálculo</h3>
+        <p><strong>Relação Ca:Mg:</strong> ${caMg}</p>
         <p><strong>Tipo de calcário recomendado:</strong> ${tipoCalcario}</p>
-        <p><strong>Quantidade a ser aplicada:</strong> ${quantidade.toFixed(2)} toneladas/ha</p>
+        <p><strong>Quantidade a ser aplicada:</strong> ${necessidade.toFixed(2)} toneladas/ha</p>
+        <p><strong>PRNT do calcário:</strong> ${prnt}%</p>
       `;
 
-      // Animação fadeInUp
       setTimeout(() => {
         resultadoDiv.style.opacity = 1;
         resultadoDiv.style.transform = 'translateY(0)';
