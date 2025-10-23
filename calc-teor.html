@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgroCalc – Cálculo de Teor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(to bottom, #f0f2f5, #d6e6d6);
+      color: #2b2b2b;
+    }
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+      z-index: 1000;
+    }
+    header img { height: 70px; width: auto; }
+    header .title { font-size: 1.6rem; color: #3d773d; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+    main { margin-top: 110px; padding: 20px; max-width: 1000px; margin-left: auto; margin-right: auto; }
+    .card { background: linear-gradient(135deg, #6bb36b, #4b7a4b); color: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); margin-bottom: 20px; animation: fadeInUp 1s ease forwards; }
+    .card h3 { margin-top: 0; }
+    input, select { padding: 10px; border-radius: 8px; border: 1px solid #ccc; width: 100%; margin-bottom: 15px; }
+    button { padding: 12px 20px; border: none; border-radius: 8px; background: #4b7a4b; color: white; font-size: 1rem; cursor: pointer; transition: background 0.3s; }
+    button:hover { background: #6bb36b; }
+    #resultado { display: none; background: #ffffffcc; padding: 20px; border-radius: 15px; margin-top: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
+    footer { text-align: center; padding: 20px; background: #3d773d; color: white; font-size: 0.9rem; margin-top: 40px; border-top: 3px solid #7a5e42; }
+    @keyframes fadeInUp { 0% {opacity: 0; transform: translateY(30px);} 100% {opacity: 1; transform: translateY(0);} }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="title">
+      <img src="logo.png" alt="Logo AgroCalc">
+      <span>AgroCalc – Cálculo de Teor</span>
+    </div>
+    <div>CEPI</div>
+  </header>
+
+  <main>
+    <div class="card">
+      <h3>Selecione os dados do solo 📊</h3>
+      <p>Informe os teores de Mg e Ca. O Al é opcional.</p>
+      <label>Teor de Magnésio (Mg):</label>
+      <input type="number" id="mg" placeholder="Ex: 2.5">
+      <label>Teor de Cálcio (Ca):</label>
+      <input type="number" id="ca" placeholder="Ex: 5.0">
+      <label>Teor de Alumínio (Al) - Opcional:</label>
+      <input type="number" id="al" placeholder="Ex: 0.5">
+      <label>PRNT (%) do calcário:</label>
+      <input type="number" id="prnt" placeholder="Ex: 80" value="">
+      <button onclick="calcularCalcario()">Calcular</button>
+      <div id="resultado"></div>
+    </div>
+
+    <div class="card">
+      <h3>Informações sobre o cálculo 🧪</h3>
+      <p>O cálculo do calcário considera a necessidade da cultura e os teores de Ca e Mg no solo. O tipo de calcário recomendado depende do teor de magnésio: </p>
+      <ul>
+        <li><strong>Calcítico:</strong> baixo Mg, rico em Ca.</li>
+        <li><strong>Dolomítico:</strong> alto Mg, corrige Ca e Mg.</li>
+        <li><strong>Magnesiano:</strong> intermediário, Mg entre 5% e 12%.</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    Desenvolvido por Brenno Henrique Board – 3º Agro – CEPI
+  </footer>
+
+  <script>
+    function calcularCalcario() {
+      const mg = parseFloat(document.getElementById('mg').value);
+      const ca = parseFloat(document.getElementById('ca').value);
+      const al = parseFloat(document.getElementById('al').value) || 0;
+      const prnt = parseFloat(document.getElementById('prnt').value) || 100;
+
+      if (isNaN(mg) || isNaN(ca)) {
+        alert("Informe os teores de Mg e Ca corretamente.");
+        return;
+      }
+
+      // Determinar tipo de calcário
+      let tipoCalcario = '';
+      if (mg < 3) tipoCalcario = 'Dolomítico';
+      else if (ca < 5 && mg >= 3) tipoCalcario = 'Calcítico';
+      else if (mg >= 3 && mg <= 5) tipoCalcario = 'Magnesiano';
+      else tipoCalcario = 'Não é necessário aplicar calcário';
+
+      // Cálculo simplificado (exemplo)
+      let quantidade = ((5 - ca + 3 - mg) * 2) / (prnt / 100);
+      if (quantidade < 0) quantidade = 0;
+
+      const resultadoDiv = document.getElementById('resultado');
+      resultadoDiv.style.display = 'block';
+      resultadoDiv.innerHTML = `
+        <h3>Resultado do Cálculo</h3>
+        <p><strong>Tipo de calcário recomendado:</strong> ${tipoCalcario}</p>
+        <p><strong>Quantidade a ser aplicada:</strong> ${quantidade.toFixed(2)} toneladas/ha</p>
+      `;
+
+      // Animação fadeInUp
+      setTimeout(() => {
+        resultadoDiv.style.opacity = 1;
+        resultadoDiv.style.transform = 'translateY(0)';
+      }, 50);
+    }
+  </script>
+</body>
+</html>
